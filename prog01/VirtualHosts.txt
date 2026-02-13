@@ -1,0 +1,68 @@
+Để cấu hình virtual hosts như yêu cầu cho 2 trang web1 và web2 ta cần chạy những lệnh sau:
+Tạo 2 thư mục con cho 2 trang web
+
+sudo mkdir -p /var/www/web1/html
+
+sudo mkdir -p /var/www/web2/html
+
+
+Chỉnh nội dung của 2 trang web
+
+
+sudo vi /var/www/web1/html/index.html
+
+sudo vi /var/www/web2/html/index.html
+
+
+Thành 
+
+<h1>Hello apache2 from web1</h1>
+
+Và 
+
+<h1>Hello apache2 from web2</h1>
+
+
+Chỉnh nội dung 2 file config 
+
+sudo vi /etc/apache2/sites-available/web1.conf
+
+sudo vi /etc/apache2/sites-available/web2.conf
+
+Thành
+
+<VirtualHost *:80>
+       ServerAdmin admin@web1
+       ServerName web1
+       ServerAlias www.web1
+       DocumentRoot /var/www/web1/html
+
+
+       ErrorLog ${APACHE_LOG_DIR}/error.log
+       CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+Và
+
+<VirtualHost *:80>
+       ServerAdmin admin@web2
+       ServerName web2
+       ServerAlias www.web2
+       DocumentRoot /var/www/web2/html
+
+
+       ErrorLog ${APACHE_LOG_DIR}/error.log
+       CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+
+Chạy các lệnh sau để apply config của web1, web2 và disable web mặc định
+
+sudo a2ensite web1.conf
+
+sudo a2ensite web2.conf
+
+sudo a2dissite 000-default.conf
+
+sudo systemctl reload apache2
+
