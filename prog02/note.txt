@@ -1,0 +1,2 @@
+g++ myid.cpp -o myid
+g++ mypassword.cpp -lcrypt -o mypassword

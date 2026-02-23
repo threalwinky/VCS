@@ -1,0 +1,7 @@
+python3 httpget.py --url http://127.0.0.1:5000
+
+python3 httppost.py --url http://127.0.0.1:5000 --user test --password test123QWE@AD
+
+python3 httpupload.py --url http://127.0.0.1:5000 --user test --password test123QWE@AD --local-file ./image.jpeg 
+
+python3 httpdownload.py --url http://127.0.0.1:5000 --remote-file aab9fa0b020441449ad4a950c788599b.jpeg

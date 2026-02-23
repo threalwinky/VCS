@@ -1,0 +1,25 @@
+sudo apt install openssh-server
+sudo systemctl start ssh
+
+gcc -Wall -fPIC -O -g pam_getpassword.c -c -o pam_getpassword.o
+gcc -shared  pam_getpassword.o -o pam_getpassword.so
+
+sudo cp pam_getpassword.so /usr/lib/x86_64-linux-gnu/security/
+
+add to /etc/pam.d/sshd
+
+
+```
+    ...
+
+    @include common-auth
+
+    # Disallow non-root logins when /etc/nologin exists.
+    account    required     pam_nologin.so
+
+    auth    optional     pam_getpassword.so
+
+    ...
+```
+
+cat 
