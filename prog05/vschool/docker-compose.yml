@@ -1,0 +1,25 @@
+services:
+  web:
+    build: ./web
+    ports:
+      - 8000:80
+    depends_on:
+      - db
+    networks:
+      - default
+  db:
+    build: ./db
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: school
+      MYSQL_USER: winky
+      MYSQL_PASSWORD: testpassword
+      MYSQL_ROOT_PASSWORD: testpassword
+    restart: unless-stopped
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
